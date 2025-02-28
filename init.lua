@@ -9,7 +9,25 @@ require("mason-lspconfig").setup({
 
 -- After setting up mason-lspconfig you may set up servers via lspconfig
 
-require("lspconfig").dartls.setup({})
+require("lspconfig").dartls.setup({
+  cmd = { "dart", "language-server", "--protocol=lsp" },
+  filetypes = { "dart" },
+  init_options = {
+    closingLabels = true,
+    flutterOutline = true,
+    onlyAnalyzeProjectsWithOpenFiles = true,
+    outline = true,
+    suggestFromUnimportedLibraries = true,
+  },
+  -- root_dir = root_pattern("pubspec.yaml"),
+  settings = {
+    dart = {
+      completeFunctionCalls = true,
+      showTodos = true,
+    },
+  },
+  on_attach = function(client, bufnr) end,
+})
 require("lspconfig").ast_grep.setup({})
 -- require("lspconfig").rust_analyzer.setup {}
 require("lspconfig").html.setup({})
